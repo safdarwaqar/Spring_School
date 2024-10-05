@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.school.entity.Questions;
 import com.school.entity.StudentDetails;
 import com.school.entity.Subject;
 import com.school.exception.StudentNotFoundException;
@@ -17,8 +18,10 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	private StudentDetailsRepository studentDetailsRepository;
 
+	// Getting Examination details from Exam-Microservice
 	@Autowired
 	private ExaminationClient examinationClient;
+
 	@Override
 	public StudentDetails createStudent(StudentDetails student) {
 		return studentDetailsRepository.save(student);
@@ -57,18 +60,21 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public List<StudentDetails> getAllStudentDetails() {
-		List<StudentDetails> allStudentDtls = studentDetailsRepository.findAll();
-		List<StudentDetails> updateStudentDtls = allStudentDtls.stream().map(x-> {
+		List<StudentDetails> updatedStudentDtls = studentDetailsRepository.findAll().stream().map(x -> {
 			x.setQuestion(examinationClient.getAllExaminations());
 			return x;
 		}).collect(Collectors.toList());
-		return updateStudentDtls;
+		return updatedStudentDtls;
 	}
 
 	@Override
 	public StudentDetails getStudentDetailsById(int id) throws StudentNotFoundException {
-		return studentDetailsRepository.findById(id)
+
+		StudentDetails studentDetails = studentDetailsRepository.findById(id)
 				.orElseThrow(() -> new StudentNotFoundException("Student not found with id: " + id));
+
+		studentDetails.setQuestion(examinationClient.getAllExaminations());
+		return studentDetails;
 	}
 
 }
