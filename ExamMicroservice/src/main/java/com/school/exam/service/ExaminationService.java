@@ -5,16 +5,16 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.school.exam.controller.ExaminationController;
+import com.school.exam.entity.Examination;
 
 @Service
 public interface ExaminationService {
 
-	List<ExaminationController> getAllExaminations();
+	List<Examination> getAllExaminations();
 
-	public Optional<ExaminationController> getExaminationById(Long id);
+	public Optional<Examination> getExaminationById(Long id);
 
-	public ExaminationController createExamination(ExaminationController examination);
+	public Examination createExamination(Examination examination);
 
 	public void deleteExamination(Long id);
 }
