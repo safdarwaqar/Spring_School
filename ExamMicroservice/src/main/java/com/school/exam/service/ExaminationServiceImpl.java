@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.school.exam.controller.ExaminationController;
+import com.school.exam.entity.Examination;
 import com.school.exam.repository.ExaminationRepository;
 
 @Service
@@ -16,15 +16,15 @@ public class ExaminationServiceImpl implements ExaminationService {
 		this.repository = repository;
 	}
 
-	public List<ExaminationController> getAllExaminations() {
+	public List<Examination> getAllExaminations() {
 		return repository.findAll();
 	}
 
-	public Optional<ExaminationController> getExaminationById(Long id) {
+	public Optional<Examination> getExaminationById(Long id) {
 		return repository.findById(id);
 	}
 
-	public ExaminationController createExamination(ExaminationController examination) {
+	public Examination createExamination(Examination examination) {
 		return repository.save(examination);
 	}
 
