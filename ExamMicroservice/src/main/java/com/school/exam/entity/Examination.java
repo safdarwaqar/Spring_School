@@ -17,6 +17,7 @@ public class Examination {
 	private String title;
 	private String description;
 
+	//add to db....
 	@ElementCollection
 	private List<String> questions;
 
