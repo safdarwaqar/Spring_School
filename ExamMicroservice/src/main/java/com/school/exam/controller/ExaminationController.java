@@ -24,6 +24,7 @@ public class ExaminationController {
 
     private final ExaminationService examinationService;
     
+    //Autowiring for auto object creation...
     @Autowired
     private ExaminationRepository repo;
 
