@@ -1,6 +1,7 @@
 package com.school.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	private StudentDetailsRepository studentDetailsRepository;
 
+	@Autowired
+	private ExaminationClient examinationClient;
 	@Override
 	public StudentDetails createStudent(StudentDetails student) {
 		return studentDetailsRepository.save(student);
@@ -54,8 +57,12 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public List<StudentDetails> getAllStudentDetails() {
-		// TODO Auto-generated method stub
-		return studentDetailsRepository.findAll();
+		List<StudentDetails> allStudentDtls = studentDetailsRepository.findAll();
+		List<StudentDetails> updateStudentDtls = allStudentDtls.stream().map(x-> {
+			x.setQuestion(examinationClient.getAllExaminations());
+			return x;
+		}).collect(Collectors.toList());
+		return updateStudentDtls;
 	}
 
 	@Override
