@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.school.exam.entity.Examination;
 import com.school.exam.repository.ExaminationRepository;
+import com.school.exam.service.ContactServiceClient;
 import com.school.exam.service.ExaminationService;
 
 @RestController
@@ -23,6 +24,8 @@ import com.school.exam.service.ExaminationService;
 public class ExaminationController {
 
     private final ExaminationService examinationService;
+    
+    private ContactServiceClient client;
     
     //Autowiring for auto object creation...
     @Autowired
@@ -70,5 +73,11 @@ public class ExaminationController {
     public ResponseEntity<Void> deleteExamination(@PathVariable Long id) {
         examinationService.deleteExamination(id);
         return ResponseEntity.noContent().build();
+    }
+    
+    @GetMapping("/testContact")
+    public String testMeth() {
+    	return examinationService.testContactService();
+//    	return "hello";
     }
 }

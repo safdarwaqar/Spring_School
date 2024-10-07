@@ -17,4 +17,5 @@ public interface ExaminationService {
 	public Examination createExamination(Examination examination);
 
 	public void deleteExamination(Long id);
+	public String testContactService();
 }

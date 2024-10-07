@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.school.entity.Questions;
 
-@FeignClient(url = "http://localhost:8081/api/examinations/", value = "Examination-Client")
+//@FeignClient(url = "http://localhost:8081/api/examinations/", value = "Examination-Client")
+
+@FeignClient(name = "exam-microservice")
 public interface ExaminationClient {
 
-	@GetMapping("/")
+	@GetMapping("api/examinations/")
 	public List<Questions> getAllExaminations();
 
 	// Get an examination by ID
