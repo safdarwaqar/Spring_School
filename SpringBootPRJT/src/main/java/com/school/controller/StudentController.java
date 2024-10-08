@@ -41,6 +41,7 @@ public class StudentController {
 	@PostMapping("/create")
 	public ResponseEntity<StudentDetails> createStudent(@Valid @RequestBody StudentDetails student) {
 		System.out.println("Accepted Request");
+		System.out.println(student);
 		StudentDetails createdStudent = studentService.createStudent(student);
 		return ResponseEntity.ok(createdStudent);
 	}

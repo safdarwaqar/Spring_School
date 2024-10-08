@@ -6,11 +6,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.school.entity.Questions;
+import com.school.entity.Contact;
 import com.school.entity.StudentDetails;
 import com.school.entity.Subject;
 import com.school.exception.StudentNotFoundException;
 import com.school.repositoy.StudentDetailsRepository;
+import com.school.service.client.ContactServiceClient;
+import com.school.service.client.ExaminationClient;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -21,9 +23,17 @@ public class StudentServiceImpl implements StudentService {
 	// Getting Examination details from Exam-Microservice
 	@Autowired
 	private ExaminationClient examinationClient;
+	
+	@Autowired
+	private ContactServiceClient contactClient;
 
 	@Override
 	public StudentDetails createStudent(StudentDetails student) {
+		Contact contactFromRequest = student.getContactClient();
+		StudentDetails savedStudent = studentDetailsRepository.save(student);
+		contactFromRequest.setStudentId(Long.valueOf(savedStudent.getId()));
+		
+		contactClient.createContact(savedStudent.getContactClient());
 		return studentDetailsRepository.save(student);
 	}
 
@@ -62,6 +72,10 @@ public class StudentServiceImpl implements StudentService {
 	public List<StudentDetails> getAllStudentDetails() {
 		List<StudentDetails> updatedStudentDtls = studentDetailsRepository.findAll().stream().map(x -> {
 			x.setQuestion(examinationClient.getAllExaminations());
+			List<Contact> allContact = contactClient.getAllContact();
+			Contact c = allContact.get(0);
+			System.out.println(c);
+			x.setContactClient(c);
 			return x;
 		}).collect(Collectors.toList());
 		return updatedStudentDtls;

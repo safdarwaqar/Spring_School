@@ -1,4 +1,4 @@
-package com.school.service;
+package com.school.service.client;
 
 import java.util.List;
 
