@@ -14,9 +14,11 @@ import com.school.contact.entity.Contact;
 import com.school.contact.service.ContactService;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/contact")
+@Slf4j
 public class ContactController {
 
 	@Autowired
@@ -25,6 +27,7 @@ public class ContactController {
 	//get All the contacts from database...
 	@GetMapping("/")
 	public List<Contact> getAllContact() {
+		log.error("Contact controller called...");
 		return contactService.findAllContacts();
 	}
 

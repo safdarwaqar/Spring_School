@@ -15,7 +15,7 @@ import com.school.entity.Questions;
 
 //@FeignClient(url = "http://localhost:8081/api/examinations/", value = "Examination-Client")
 
-@FeignClient(name = "exam-microservice")
+@FeignClient(name = "EXAMINATION-MICROSERVICE")
 public interface ExaminationClient {
 
 	@GetMapping("api/examinations/")

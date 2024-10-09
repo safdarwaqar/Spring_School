@@ -1,18 +1,15 @@
-package com.school.exam;
+package com.school.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients
 @EnableDiscoveryClient
-public class ExamMicroserviceApplication {
+public class ApiGatewayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ExamMicroserviceApplication.class, args);
-		System.out.println("Exam Application Started...");
+		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 
 }
