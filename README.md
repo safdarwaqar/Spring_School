@@ -1,6 +1,6 @@
 # Spring_School
 School Management is a microservice architechture based application.
-It includes Api Gateway for microserce communicating with each other
+It includes Api Gateway for microservice communicating with each other
 Implemented FeingClient for Calling differnt microservices
 For distributed tracing system Zipkin has been implemented
 Loggin logs with Sl4j logger.
