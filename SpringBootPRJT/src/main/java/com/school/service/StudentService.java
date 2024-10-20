@@ -8,7 +8,7 @@ import com.school.exception.StudentNotFoundException;
 
 public interface StudentService {
 
-	// Method to create a new student
+	// Method to create a new student...
 	StudentDetails createStudent(StudentDetails student);
 
 	// Method to delete a student by ID
