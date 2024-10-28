@@ -39,6 +39,9 @@ public class StudentDetails {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Subject> subjects;
+    
+    transient private List<Questions> question;
+    transient private Contact contactClient;
 
     @Override
     public String toString() {
