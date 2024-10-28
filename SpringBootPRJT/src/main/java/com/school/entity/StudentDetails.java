@@ -34,6 +34,7 @@ public class StudentDetails {
     private Long phone; // Using Long for potential null values
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Address address;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
